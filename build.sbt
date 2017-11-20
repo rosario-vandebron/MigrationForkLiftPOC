@@ -57,7 +57,7 @@ lazy val migrationManager = Project("migration_manager",
 }
 
 lazy val migrations = (project in file("migrations"))
-  .dependsOn(migrationManager, persistence)
+  .dependsOn(migrationManager, persistence, generatedCode)
   .settings(commonSettings:_*)
   .settings {
   libraryDependencies ++= migrationsDependencies

@@ -1,8 +1,15 @@
 import slick.jdbc.PostgresProfile.api._
-import com.liyaos.forklift.slick.SqlMigration
+import com.liyaos.forklift.slick.{APIMigration, SqlMigration}
+import database.Tables
+import slick.lifted.PrimaryKey
+import slick.migration.api.{PostgresDialect, TableMigration}
 
 object M2 {
-  MyMigrations.migrations = MyMigrations.migrations :+ SqlMigration(2)(List(
-    sqlu"""ALTER TABLE accounts ADD COLUMN test2 VARCHAR""" // your sql code goes here
-  ))
+  implicit val dialect = new PostgresDialect
+  MyMigrations.migrations = MyMigrations.migrations :+ APIMigration(2)(
+    TableMigration(Tables.smartChargeTableQ)
+      .create
+      .addColumns(_.id)
+//      .addPrimaryKeys( table => PrimaryKey(table.id.toString(), Array(table.id.toNode)))
+  )
 }

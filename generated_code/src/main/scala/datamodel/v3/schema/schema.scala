@@ -1,4 +1,4 @@
-package datamodel.latest.schema
+package datamodel.v3.schema
 // AUTO-GENERATED Slick data model
 /** Stand-alone Slick data model for immediate use */
 object tables extends {
