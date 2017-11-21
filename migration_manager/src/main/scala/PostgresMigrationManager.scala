@@ -15,15 +15,9 @@ trait PostgresMigrationManager extends SlickMigrationManager {
     import slick.jdbc.PostgresProfile.api._
 
     val dropSchemaAction = sqlu"""drop schema if exists "bigd_ev" cascade;"""
-    val deleteInit = sqlu"""drop table __migrations__ ;"""
+    val deleteInit = sqlu"""drop table if exists __migrations__ ;"""
 
-    try{
-      val f = db.run(dropSchemaAction.andThen(deleteInit))
-      Await.result(f, Duration.Inf)
-
-    }finally {
-      db.close()
-    }
-
+    val f = db.run(dropSchemaAction.andThen(deleteInit))
+    Await.result(f, Duration.Inf)
   }
 }
