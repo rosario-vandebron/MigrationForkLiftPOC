@@ -44,10 +44,9 @@ lazy val forkliftDependencies = List(
 
 
 lazy val migrationsDependencies =
-  db ++ forkliftDependencies ++ logging
+  db ++ forkliftDependencies ++ logging ++ scalatest
 
 lazy val migrationManagerDependencies = db ++ forkliftDependencies
-
 
 
 lazy val migrationManager = Project("migration_manager",
@@ -62,16 +61,6 @@ lazy val migrations = (project in file("migrations"))
   .settings {
   libraryDependencies ++= migrationsDependencies
 }
-
-//lazy val tools = (project in file("tools/git"))
-//  .settings(commonSettings:_*)
-//  .settings {
-//  libraryDependencies ++= forkliftDependencies ++ List(
-//    "com.liyaos" %% "scala-forklift-git-tools" % forkliftVersion,
-//    "com.typesafe" % "config" % "1.3.0",
-//    "org.eclipse.jgit" % "org.eclipse.jgit" % "4.0.1.201506240215-r"
-//  )
-//}
 
 
 lazy val generatedCode = (project in file("generated_code"))

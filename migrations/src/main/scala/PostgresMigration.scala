@@ -8,8 +8,11 @@ object PostgresMigration extends App
   MigrationSummary
   execCommands(args.toList)
 
-  override def execCommands(args: List[String]) = args match {
-    case "reset" :: Nil => reset
-    case _                => super.execCommands(args)
+  override def resetCommand(): Unit ={
+    try{
+      reset
+    }finally {
+      db.close()
+    }
   }
 }
