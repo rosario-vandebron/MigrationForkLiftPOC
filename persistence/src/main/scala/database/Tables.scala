@@ -10,7 +10,7 @@ import slick.jdbc.PostgresProfile.api._
 object Tables {
   private val accountsTableReference = "account_id"
 
-  abstract class BaseTable[T](tag: Tag, name: String) extends Table[T](tag, name) {
+  abstract class BaseTable[T](tag: Tag, name: String) extends Table[T](tag, Some("bigd_ev"), name) {
     def id = column[UUID]("id", O.PrimaryKey)
 
     def createdAt = column[Option[Timestamp]]("created_at")

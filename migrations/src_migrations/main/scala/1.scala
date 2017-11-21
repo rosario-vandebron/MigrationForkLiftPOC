@@ -1,24 +1,12 @@
-import com.liyaos.forklift.slick.{APIMigration, DBIOMigration}
-import database.Tables
-import slick.lifted.PrimaryKey
-import slick.migration.api.{PostgresDialect, TableMigration}
-
-
-//object M1 {
-//  MyMigrations.migrations = MyMigrations.migrations :+ DBIOMigration(1)(
-//    DBIO.seq(
-////      Tables.accountsTableQ.schema.create
-//    ))
-//}
+import com.liyaos.forklift.slick.{APIMigration, DBIOMigration, SqlMigration}
+import slick.jdbc.PostgresProfile.api._
 
 object M1 {
-  implicit val dialect = new PostgresDialect
-  MyMigrations.migrations = MyMigrations.migrations :+ APIMigration(1)(
-    TableMigration(Tables.accountsTableQ)
-        .create
-        .addColumns(_.id)
-//        .addPrimaryKeys( table => PrimaryKey(table.id.toString(), Array(table.id.toNode)))
-  )
+  PostgresMigration.migrations = PostgresMigration.migrations :+ SqlMigration(1)(List(
+        sqlu"""create schema if not exists "bigd_ev";"""
+  ))
 }
+
+
 
 

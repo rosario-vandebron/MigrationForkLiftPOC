@@ -1,9 +1,9 @@
 import com.liyaos.forklift.slick._
 
-object MyMigrations extends App
+object PostgresMigration extends App
     with SlickMigrationCommandLineTool
     with SlickMigrationCommands
-    with SlickMigrationManager
+    with PostgresMigrationManager
     with Codegen {
   MigrationSummary
   execCommands(args.toList)

@@ -27,7 +27,7 @@ trait tables {
     AccountsRow(<<[java.util.UUID])
   }
   /** Table description of table accounts. Objects of this class serve as prototypes for rows in queries. */
-  class Accounts(_tableTag: Tag) extends profile.api.Table[AccountsRow](_tableTag, "accounts") {
+  class Accounts(_tableTag: Tag) extends profile.api.Table[AccountsRow](_tableTag, Some("bigd_ev"), "accounts") {
     def * = id <> (AccountsRow, AccountsRow.unapply)
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = Rep.Some(id).shaped.<>(r => r.map(_=> AccountsRow(r.get)), (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
@@ -47,7 +47,7 @@ trait tables {
     SmartChargeLocationsRow(<<[java.util.UUID])
   }
   /** Table description of table smart_charge_locations. Objects of this class serve as prototypes for rows in queries. */
-  class SmartChargeLocations(_tableTag: Tag) extends profile.api.Table[SmartChargeLocationsRow](_tableTag, "smart_charge_locations") {
+  class SmartChargeLocations(_tableTag: Tag) extends profile.api.Table[SmartChargeLocationsRow](_tableTag, Some("bigd_ev"), "smart_charge_locations") {
     def * = id <> (SmartChargeLocationsRow, SmartChargeLocationsRow.unapply)
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = Rep.Some(id).shaped.<>(r => r.map(_=> SmartChargeLocationsRow(r.get)), (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
